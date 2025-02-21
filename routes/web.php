@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -31,4 +32,5 @@ Route::resource('user', UserController::class);
 //Shop
 Route::group(['prefix' => 'shop'], function() {
     Route::resource('products', ProductController::class);
+    Route::resource('cart', CartItemController::class);
 });

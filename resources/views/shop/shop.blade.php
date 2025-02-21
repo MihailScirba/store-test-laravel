@@ -20,12 +20,18 @@
         .pr-card {
             height: 500px;
             padding: 5%;
-            border: 1px solid gray
+            border: 1px solid gray;
+            border-radius: 1em;
         }
 
         .pr-card-header,
         .pr-card-body>* {
             margin-bottom: 5%;
+        }
+        
+        .pr-card-header,
+        .pr-card-header img {
+            border-radius: .5em;
         }
 
         .pr-card-header {
@@ -68,30 +74,31 @@
 @endsection
 
 @section('content')
-    <main>
-        <div class="grid-container">
-            @foreach ($products as $product)
-                <div class="pr-card">
-                    <div class="pr-card-header">
-                        <img src="{{ asset($product->image) }}" alt="unloaded image">
-                    </div>
-                    <div class="pr-card-body">
-                        <h3 class="name">{{ $product->name }}</h3>
-                        <p class="pr-description">{{ $product->description }}</p>
-                        <div class="price-and-stock">
-                            @php
-                                $stockText = $product->stock > 0 ? 'In stock' : 'Not in stock';
-                                $stockColorClass = $product->stock > 0 ? 'in-stock' : 'not-in-stock';
-                            @endphp
-                            <div class="price">{{ $product->price }} $</div>
-                            <div class="stock {{ $stockColorClass }}">{{ $stockText }}</div>
-                        </div>
-                    </div>
-                    <form action="" method="">
-                        <button type="submit" class="btn btn-dark w-100">Add to cart</button>
-                    </form>
+    <div class=" d-flex justify-content-end mt-5">
+        <a href="{{ route('cart.index') }}" class="btn btn-success w-25">Cart</a>
+    </div>
+    <div class="grid-container">
+        @foreach ($products as $product)
+            <div class="pr-card">
+                <div class="pr-card-header">
+                    <img src="{{ asset($product->image) }}" alt="unloaded image">
                 </div>
-            @endforeach
-        </div>
-    </main>
+                <div class="pr-card-body">
+                    <h3 class="name">{{ $product->name }}</h3>
+                    <p class="pr-description">{{ $product->description }}</p>
+                    <div class="price-and-stock">
+                        @php
+                            $stockText = $product->stock > 0 ? 'In stock' : 'Not in stock';
+                            $stockColorClass = $product->stock > 0 ? 'in-stock' : 'not-in-stock';
+                        @endphp
+                        <div class="price">{{ $product->price }} $</div>
+                        <div class="stock {{ $stockColorClass }}">{{ $stockText }}</div>
+                    </div>
+                </div>
+                <form action="" method="">
+                    <button type="submit" class="btn btn-dark w-100">Add to cart</button>
+                </form>
+            </div>
+        @endforeach
+    </div>
 @endsection

@@ -8,6 +8,12 @@
     <title>CRUD_TEst</title>
     <link rel="icon" href="{{ asset('storage/images/static/tab_icon.ico') }}" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .main {
+            height: 100%;
+            overflow-y: scroll;
+        }
+    </style>
     @yield('custom_style')
 </head>
 
@@ -50,11 +56,13 @@
     </nav>
     <!-- Navbar -->
 
-    @yield('content')
+    <main>
+        @yield('content')
+    </main>
 
 
     <!-- Footer -->
-    <footer class="bg-primary text-center text-white" {{-- style="position: fixed; bottom: 0; width: 100vw" --}}>
+    <footer class="bg-primary text-center text-white" style="position: fixed; bottom: 0; width: 100vw">
 
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
