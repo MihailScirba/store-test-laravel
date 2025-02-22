@@ -13,8 +13,8 @@
             height: 100%;
             overflow-y: scroll;
         }
-    </style>
-    @yield('custom_style')
+        </style>
+        @yield('custom_style')
 </head>
 
 <body>

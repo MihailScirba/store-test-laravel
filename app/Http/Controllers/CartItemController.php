@@ -29,7 +29,22 @@ class CartItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cartItem = CartItem::findOrFail($request->product_id);
+        if ($cartItem) 
+        {
+            $cartItem->update([
+                'quantity' => $cartItem->quantity + 1
+            ]);
+        } 
+        else 
+        {
+            $cartItem = new CartItem();
+            $cartItem->product_id = $request->product_id;
+            $cartItem->quantity = 1;
+            $cartItem->save();
+        }
+        return redirect()->route('products.index');
+    
     }
 
     /**
@@ -45,7 +60,8 @@ class CartItemController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $item = CartItem::findOrFail($id);
+
     }
 
     /**
@@ -62,5 +78,14 @@ class CartItemController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+    
+    
+    public function incrementQuantity(int $id) {
+        return 'incremented: ' . $id;
+    }
+    
+    public function decrementQuantity(int $id) {
+        return 'decremented: ' . $id;
     }
 }

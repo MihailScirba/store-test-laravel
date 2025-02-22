@@ -1,0 +1,2 @@
+- Implement mangaing quantity in cart
+- Implement deleting item from cart

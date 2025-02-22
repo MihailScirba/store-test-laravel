@@ -28,7 +28,7 @@
         .pr-card-body>* {
             margin-bottom: 5%;
         }
-        
+
         .pr-card-header,
         .pr-card-header img {
             border-radius: .5em;
@@ -74,7 +74,7 @@
 @endsection
 
 @section('content')
-    <div class=" d-flex justify-content-end mt-5">
+    <div class=" d-flex justify-content-center mt-5">
         <a href="{{ route('cart.index') }}" class="btn btn-success w-25">Cart</a>
     </div>
     <div class="grid-container">
@@ -95,7 +95,9 @@
                         <div class="stock {{ $stockColorClass }}">{{ $stockText }}</div>
                     </div>
                 </div>
-                <form action="" method="">
+                <form action="{{ route('cart.store') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="product_id" value="{{ $product->id }}">
                     <button type="submit" class="btn btn-dark w-100">Add to cart</button>
                 </form>
             </div>
