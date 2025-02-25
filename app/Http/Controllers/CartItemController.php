@@ -29,7 +29,7 @@ class CartItemController extends Controller
      */
     public function store(Request $request)
     {
-        $cartItem = CartItem::findOrFail($request->product_id);
+        $cartItem = CartItem::find($request->product_id);
         if ($cartItem) {
             $cartItem->update([
                 'quantity' => $cartItem->quantity + 1
