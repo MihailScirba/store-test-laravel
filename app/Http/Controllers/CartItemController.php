@@ -56,7 +56,7 @@ class CartItemController extends Controller
      */
     public function edit(string $id)
     {
-        $item = CartItem::findOrFail($id);
+        //
     }
 
     /**
@@ -72,7 +72,8 @@ class CartItemController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        CartItem::destroy($id);
+        return redirect()->back();
     }
 
 

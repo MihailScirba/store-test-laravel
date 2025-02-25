@@ -51,7 +51,8 @@
                                         class="col-md-3 col-lg-3 col-xl-2">
                                         @csrf
                                         <div class="d-flex" style="gap: 10px;">
-                                            <button type="submit" name="action" value="decrement" class="btn btn-dark"
+                                            <button type="submit" name="action" value="decrement"
+                                                data-price="{{ $item->product->price }}" class="btn btn-dark decrement"
                                                 data-mdb-button-init data-mdb-ripple-init>
                                                 -
                                             </button>
@@ -60,18 +61,22 @@
                                                 value="{{ $item->quantity }}" type="number"
                                                 class="form-control form-control-sm" />
 
-                                            <button type="submit" name="action" value="increment" class="btn btn-dark"
+                                            <button type="submit" name="action" value="increment"
+                                                data-price="{{ $item->product->price }}" class="btn btn-dark increment"
                                                 data-mdb-button-init data-mdb-ripple-init>
                                                 +
                                             </button>
                                         </div>
                                     </form>
                                     <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-                                        <h5 class="mb-0">{{ $item->quantity * $item->product->price }} $</h5>
+                                        <h5 class="mb-0 price">{{ $item->quantity * $item->product->price }} $</h5>
                                     </div>
-                                    <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-                                        <a href="#!" class="text-danger"><i class="fas fa-trash fa-lg"></i></a>
-                                    </div>
+                                    <form action="{{ route('cart.destroy', $item->id) }}" method="POST"
+                                        class="col-md-1 col-lg-1 col-xl-1">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
