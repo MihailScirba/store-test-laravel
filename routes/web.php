@@ -32,7 +32,7 @@ Route::resource('user', UserController::class);
 //Shop
 Route::group(['prefix' => 'shop'], function() {
     Route::resource('products', ProductController::class);
-    Route::post('cart/{itemId}/item-quantity/increment', [CartItemController::class, 'incrementQuantity']);
-    Route::post('cart/{itemId}/item-quantity/decrement', [CartItemController::class, 'decrementQuantity']);
+    Route::post('cart/{itemId}/item-quantity/increment', [CartItemController::class, 'quantityManager'])
+        ->name('cart.quantity_manager');
     Route::resource('cart', CartItemController::class);
 });

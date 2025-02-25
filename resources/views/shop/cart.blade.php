@@ -22,39 +22,6 @@
     <div class=" d-flex justify-content-center mt-5">
         <a href="{{ route('products.index') }}" class="btn btn-success w-25">Go back to shop</a>
     </div>
-    {{-- <div class="d-flex justify-content-center mt-5">
-        <table class="table table-striped w-75">
-            <thead>
-                <tr>
-                    <th scope="col">Image</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($cartItems as $item)
-                    <tr>
-                        <td>
-                            <img src="{{ asset($item->product->image) }}" alt="uploaded image"
-                                style="width: 100; height: 100px">
-                        </td>
-                        <td>
-                            {{ $item->product->name }}
-                        </td>
-                        <td>
-                            {{ $item->quantity }}
-                        </td>
-                        <td>
-                            <form action="">
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div> --}}
     <section class="h-100">
         <div class="container h-100 py-5">
             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -78,24 +45,27 @@
                                     </div>
                                     <div class="col-md-3 col-lg-3 col-xl-3">
                                         <p class="lead fw-normal mb-2">{{ $item->product->name }}</p>
-                                        {{-- <p><span class="text-muted">Size: </span>M <span class="text-muted">Color:
-                                            </span>Grey
-                                        </p> --}}
                                     </div>
-                                    <div class="col-md-3 col-lg-3 col-xl-2 d-flex" style="gap: 10px;">
-                                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-dark decrement"
-                                            data-id="{{ $item->id }}">
-                                            -
-                                        </button>
 
-                                        <input id="form1" min="1" name="quantity" value="{{ $item->quantity }}"
-                                            type="number" class="form-control form-control-sm" />
+                                    <form action="{{ route('cart.quantity_manager', $item->id) }}" method="POST"
+                                        class="col-md-3 col-lg-3 col-xl-2">
+                                        @csrf
+                                        <div class="d-flex" style="gap: 10px;">
+                                            <button type="submit" name="action" value="decrement" class="btn btn-dark"
+                                                data-mdb-button-init data-mdb-ripple-init>
+                                                -
+                                            </button>
 
-                                        <button data-mdb-button-init data-mdb-ripple-init class="btn btn-dark increment"
-                                            data-id="{{ $item->id }}">
-                                            +
-                                        </button>
-                                    </div>
+                                            <input id="form1" min="1" name="quantity"
+                                                value="{{ $item->quantity }}" type="number"
+                                                class="form-control form-control-sm" />
+
+                                            <button type="submit" name="action" value="increment" class="btn btn-dark"
+                                                data-mdb-button-init data-mdb-ripple-init>
+                                                +
+                                            </button>
+                                        </div>
+                                    </form>
                                     <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                                         <h5 class="mb-0">{{ $item->quantity * $item->product->price }} $</h5>
                                     </div>
@@ -105,7 +75,6 @@
                                 </div>
                             </div>
                         </div>
-                        @vite(['resources/js/quantityCartRequest.js'])
                     @endforeach
 
                     <div class="card mb-4">
